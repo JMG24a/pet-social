@@ -4,8 +4,8 @@ const copyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const terserWebpackPlugin = require("terser-webpack-plugin")
 
-module.export = {
-	entry: "src/index.js",
+module.exports = {
+	entry: "./src/index.js",
 	output: {
 		path: path.resolve(__dirname,"dist"),
 		publicPath: "/",
