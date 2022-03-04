@@ -1,8 +1,15 @@
 import React from "react";
+import  { ListOfCategories } from '../containers/ListOfCategoryes'
+import { GlobalStyles } from '../globalStyles'
 
 function App(){
     return(
-        <h1>PET SOCIAL</h1>
+
+        <>
+            <GlobalStyles/>
+            <h1>PET SOCIAL</h1>
+            <ListOfCategories/>
+        </>
     )
 }
 
