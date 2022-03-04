@@ -31,7 +31,7 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(png|svg)$/,
+				test: /\.(jpg|png|svg)$/,
 				type: "assect/resource"
 			}
 		]
