@@ -10,7 +10,6 @@ export const Anchor = styled.a`
 
 export const Image = styled.img`
     width: 75px;
-    height: auto;
     height: 75px;
     border: 1px solid #ddd;
     border-radius: 50%;

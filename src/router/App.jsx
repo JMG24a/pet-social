@@ -1,14 +1,18 @@
 import React from "react";
-import  { ListOfCategories } from '../containers/ListOfCategoryes'
-import { GlobalStyles } from '../globalStyles'
+//components
+import { Logo } from '../components/Logo'
+import { ListOfCategories } from '../containers/ListOfCategoryes'
+import { ListOfPhotoCard } from '../containers/ListOfPhotoCard'
+//styles
+import { GlobalStyles } from '../styles/globalStyles'
 
 function App(){
     return(
-
         <>
             <GlobalStyles/>
-            <h1>PET SOCIAL</h1>
+            <Logo/>
             <ListOfCategories/>
+            <ListOfPhotoCard/>
         </>
     )
 }
