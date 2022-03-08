@@ -1,14 +1,18 @@
 import React from 'react';
 import {Anchor, Image} from './styles'
 
+const styleds = {
+    "text-decoration": "none"
+}
 
-function Category({ cover = DEFAULT_IMAGE, path, emoji = '?' }){
+function Category({category}){
+
     return(
-        <Anchor src={path}>
-            <Image src={cover}/>
-            {emoji}
+        <Anchor styled={styleds} to={`/pet/${category.id}`}>
+            <Image src={category.cover}/>
+            {category.emoji}
         </Anchor>
     ) 
 }
 
-export {Category}
+export {Category} 

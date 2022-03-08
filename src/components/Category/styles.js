@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Anchor = styled.a`
+export const Anchor = styled(Link)`
     width: 75px;
-    display: flex ;
-    flex-direction:column;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
+    text-align: center;
 `
 
 export const Image = styled.img`
