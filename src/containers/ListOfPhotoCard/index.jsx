@@ -1,15 +1,41 @@
+//react
 import React from 'react';
+//graphql
+import { useQuery } from "@apollo/client";
+import { withPhotos } from '../../context/whitPhotos';
+//components
 import { PhotoCard } from '../../components/PhotoCard';
+import { Loading } from '../../components/Loading';
 
-function ListOfPhotoCard(){
+function ListOfPhotoCard({categoryId}){
+
+    const { 
+        loading, 
+        error, 
+        data 
+    } = useQuery(withPhotos,{ variables: { categoryId: categoryId } });
+
+    const centerLoading = {
+        position: "relative"
+    }
+
+
     return(
-        <ul>
-            {[1,2,3,4].map(card => (
-                <li key={card}>
-                    <PhotoCard/>
-                </li>
-            ))}
-        </ul>
+        <div style={centerLoading}> 
+            {!!loading && <Loading/>}
+            {!!error && !loading && <p>ERROR</p>}
+            {!loading && !error && 
+                <ul>
+                    {data.photos.map(card => (
+                        <li key={card.id}>
+                            <PhotoCard 
+                                {...card}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            }
+        </div>
     )
 }
 
