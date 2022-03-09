@@ -24,9 +24,6 @@ function Description({id}){
             {!!error && !loading && <p>ERROR</p>}
             {!loading && 
             <div>
-                {
-                    console.log('Calequa', data.photo)
-                }
                 <PhotoCard {...data.photo}/>
             </div>
             }

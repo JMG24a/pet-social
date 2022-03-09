@@ -5,6 +5,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache  } from '@apollo/client'
 import { APIPhotoGql } from '../env'
 //components
 import { App } from './router/App'
+import { AuthProvider } from './context/context';
 
 const client = new ApolloClient({
     uri: APIPhotoGql,
@@ -12,8 +13,11 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
+ 
     <ApolloProvider client={client}>
-        <App/>
+        <AuthProvider>
+            <App/>
+        </AuthProvider>
     </ApolloProvider>,
     document.getElementById('app')
 )

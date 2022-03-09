@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../context/context";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 //components
 import { Home } from '../pages/Home'
 import { Detail } from "../pages/Detail";
 import { Nav } from "../components/Nav";
+import { NoAuth } from '../pages/NoAuth'
 //styles
 import { GlobalStyles } from '../styles/globalStyles'
-import { useState } from "react";
 
 
 function App(){
 
-    const [isAuth, setIsAuth] = useState(false)
+    const {isAuth, setIsAuth} = useContext(Context);
 
     return(
         <BrowserRouter>
@@ -28,10 +29,12 @@ function App(){
                     </>
                     :
                     <>
-                        <Route path="/liked" element={<p>No registrado</p>}/>
-                        <Route path="/user" element={<p>No registrado</p>}/>
+                        <Route path="/liked" element={<NoAuth/>}/>
+                        <Route path="/user" element={<NoAuth/>}/>
                     </>
                 }
+
+                <Route path="/register" element={<NoAuth/>}/>
 
             </Routes>
             <Nav/>
