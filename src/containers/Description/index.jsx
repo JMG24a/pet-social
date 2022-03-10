@@ -1,7 +1,7 @@
 import React from 'react';
 //graphql
 import { useQuery } from "@apollo/client";
-import { getPhoto } from '../../context/getPhoto';
+import { getPhoto } from '../../context/schemas/getPhoto';
 //components
 import { PhotoCard } from '../../components/PhotoCard';
 import { Loading } from '../../components/Loading';

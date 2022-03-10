@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+    position: relative;
+    height: 250px;
+`
+
 export const Form = styled.form`
     width: 80%;
     height: auto;
     margin: 0 auto;
     padding: 10px;
 `
+
 export const Label = styled.label`
     display: block;
     margin-bottom: 5px;
@@ -30,4 +36,15 @@ export const Button = styled.button`
     height: 25px;
     border-radius: 5px;
     box-shadow: 1px 1px 1px grey;
+`
+
+export const Error = styled.p`
+    width: 70%;
+    margin: 10px auto;
+    padding: 5px;
+    background-color: #9d938c;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
 `

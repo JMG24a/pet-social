@@ -1,76 +1,101 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {  Registro } from '../../context/mutateRegister';
-import { useQuery } from "@apollo/client";
+import {  useRegisterMutation } from '../../context/schemas/registerMutation';
 import { useInputValue } from '../../hook/useInputValue';
-import { Context } from '../../context/context';
+import { Context } from '../../context';
+//components
+import { Loading } from '../../components/Loading'
 //styles
-import { Form, Label, Input, Button} from './styles'
+import { Wrapper, Form, Label, Input, Button, Error} from './styles';
 
 function NoRegister(){
 
     const navigate = useNavigate()
+    const { registerMutation, loading, error } = useRegisterMutation()
+
+    const [getErrorValidation, setErrorValidation] = useState(false)
 
     const{
-        setIsAuth
+        auth
     } = useContext(Context)
 
     let email = useInputValue('');
     let password = useInputValue('');
+    let password2 = useInputValue('');
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
         e.preventDefault()
 
-        const input = {
-            email: email.getValue,
-            password: password.getValue
+        if(password.getValue === password2.getValue){
+            const input = {
+                email: email.getValue,
+                password: password.getValue
+            }
+    
+            const variables = { input }
+            
+            try{
+                const {data} = await registerMutation({ variables })
+                auth(data.signup)
+                navigate('/user')
+            }catch(e){
+                console.log('error las contraceñas no coinciden')
+            }
+        }else{
+            setErrorValidation(true)
         }
-
-        const { 
-            loading, 
-            error, 
-            data 
-        } = useQuery(Registro,{ variables: { input: input } });
-
-        console.log(data)
-        setIsAuth(true)
-        navigate('/user')
     }
 
-
+    //console.log(error)
     return(
-        <>
-            <Form onSubmit={handleSubmit}>
-                <Label htmlFor="email">Email</Label>
-                <Input 
-                    type="text" 
-                    id='email'
-                    placeholder='example@domine.com'
-                    value={email.getValue} // <- asi
-                    onChange={(e) => email.onChange(e)} // <-asi
-                />
-
-                <Label htmlFor="email">Contraceña</Label>
-                <Input 
-                    type="text"
-                    id='password'
-                    placeholder='Contraceña'
-                    {...password} // o asi
-                />
-
-                <Label htmlFor="email">Confirmar contraceña</Label>
-                <Input 
-                    type="text"
-                    id='password_confirmed'
-                    placeholder='Contraceña'
-                />
-
-                <Button
-                    type="submit"
-                >
-                    Crear
-                </Button>
-            </Form>   
+        <>  
+            {!!loading ? 
+                <Wrapper>
+                    <Loading/>
+                </Wrapper>
+                :
+                <>
+                <Form onSubmit={handleSubmit}>
+                    <Label htmlFor="email">Email</Label>
+                    <Input 
+                        type="text" 
+                        id='email'
+                        placeholder='example@domine.com'
+                        value={email.getValue} // <- asi
+                        onChange={(e) => email.onChange(e)} // <-asi
+                    />
+    
+                    <Label htmlFor="password">Contraceña</Label>
+                    <Input 
+                        type="text"
+                        id='password'
+                        placeholder='Contraceña'
+                        {...password} // o asi
+                    />
+    
+                    <Label htmlFor="password_confirmed">Confirmar contraceña</Label>
+                    <Input 
+                        type="text"
+                        id='password_confirmed'
+                        placeholder='Contraceña'
+                        {...password2}
+                    />
+    
+                    <Button
+                        type="submit"
+                    >
+                        Crear
+                    </Button>
+                </Form> 
+                {!!error &&
+                    <Error>El email ya fue registrado</Error>
+                }
+                {!!getErrorValidation &&
+                    <Error>Las contraceñas no coinciden</Error>
+                }
+            </>
+            }
+  
         </>
     )
 }

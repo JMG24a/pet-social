@@ -2,7 +2,7 @@
 import React from 'react';
 //graphql
 import { useQuery } from "@apollo/client";
-import { withPhotos } from '../../context/whitPhotos';
+import { getPhotos } from '../../context/schemas/getPhotos';
 //components
 import { PhotoCard } from '../../components/PhotoCard';
 import { Loading } from '../../components/Loading';
@@ -13,7 +13,7 @@ function ListOfPhotoCard({categoryId}){
         loading, 
         error, 
         data 
-    } = useQuery(withPhotos,{ variables: { categoryId: categoryId } });
+    } = useQuery(getPhotos,{ variables: { categoryId: categoryId } });
 
     const centerLoading = {
         position: "relative"
