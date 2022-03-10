@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" href="https://w7.pngwing.com/pngs/878/402/png-transparent-laser-engraving-silhouette-pet-sitter-logo-steel-fictional-character.png">
     <title>PetSocial</title>
 </head>
 <body>
     <div id="app"></div>
+    <noscript>
+        Js is required
+    </noscript>
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/service-worker.js')
+              .then(registration => {
+                console.log('SW registrado')
+              })
+              .catch(registrationError => {
+                console.log('SW error', registrationError)
+              })
+          })
+        }
+      </script>
 </body>
 </html>
