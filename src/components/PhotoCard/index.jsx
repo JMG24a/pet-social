@@ -1,32 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 //hook
 import { useIntersection } from '../../hook/useIntersection';
-import { useLocalStorage } from '../../hook/useLocalStorage';
-import { useMuationToogleLike } from '../../hook/useMutationToggleLike';
+import { useLikeMuation } from '../../context/schemas/likedMutation';
 //comnponents
 import { ButtonLiked } from '../ButtonLiked';
 //styles
 import { ImgWrapper, Img, Article } from './styles';
 
-const deaultPhoto = "https://www.goredforwomen.org/-/media/Healthy-Living-Images/Healthy-Lifestyle/Pets/puppy-kitten-heart.jpg"
+function PhotoCard({id, likes, src, liked = true}){
 
-function PhotoCard({id, likes, src}){
-
-    const key = `Like-${id}`
-    const { mutation, mutationLoading, mutationError } = useMuationToogleLike()
-    const [isShow, ref] = useIntersection()
-    const [getData, setData] = useLocalStorage();
-    const [isLike, setIsLike] = useState(getData(key));
+    const { likedMutation } = useLikeMuation();
+    const [isShow, ref] = useIntersection();
 
     const handleClick = () =>{
-        !isLike && mutation({
+        likedMutation({
             variables: {
               input: { id }
             }
           })
-        setIsLike(!isLike)
-        setData(key, !isLike)
     }
 
     return(
@@ -40,7 +32,7 @@ function PhotoCard({id, likes, src}){
                     </Link>
                     <ButtonLiked
                         likes={likes}
-                        isLike={isLike}
+                        isLike={liked}
                         handleClick={handleClick}
                     />
                 </>

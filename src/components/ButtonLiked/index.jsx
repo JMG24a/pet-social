@@ -11,7 +11,7 @@ function ButtonLiked({handleClick, isLike, likes}){
             <Button>
                 <Icon 
                     size='32px' 
-                    onClick={handleClick}
+                    onClick={()=>handleClick()}
                 /> {likes} likes!
             </Button>
         </>
